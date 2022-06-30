@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import validateLogIn from "../../hooks/validateLogIn";
 
 import {
@@ -13,11 +14,13 @@ import {
 } from "@chakra-ui/react";
 
 const Login = () => {
+  // States
   const [user, setUser] = useState();
   const [pass, setPass] = useState();
   const [usrErr, setUsrErr] = useState();
   const [passErr, setPassErr] = useState();
 
+  // Functions
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = { username: user, password: pass };
@@ -44,6 +47,8 @@ const Login = () => {
     setUser("");
     setPass("");
   };
+
+  const navigate = useNavigate();
 
   return (
     <VStack
@@ -95,7 +100,7 @@ const Login = () => {
         <Button colorScheme="teal" type="submit">
           Log In
         </Button>
-        <Button>Create Account</Button>
+        <Button onClick={() => navigate("/register")}>Create Account</Button>
       </ButtonGroup>
     </VStack>
   );
