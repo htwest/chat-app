@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import validateLogIn from "../../hooks/validateLogIn";
+import postSignUp from "../../hooks/postSignUp";
 
 import {
   VStack,
@@ -14,33 +15,17 @@ import {
 } from "@chakra-ui/react";
 
 const SignUp = () => {
-  const [user, setUser] = useState();
-  const [pass, setPass] = useState();
-  const [usrErr, setUsrErr] = useState();
-  const [passErr, setPassErr] = useState();
+  const [user, setUser] = useState("");
+  const [pass, setPass] = useState("");
+  const [usrErr, setUsrErr] = useState(false);
+  const [passErr, setPassErr] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = { username: user, password: pass };
-    console.log(data);
-    const { error, message, success } = validateLogIn(data);
-    if (error === "blank") {
-      setUsrErr(message);
-      setPassErr(message);
-    }
-    if (error === "username") {
-      console.log(message);
-      setUsrErr(message);
-      console.log(usrErr);
-    }
-    if (error === "password") {
-      console.log(message);
-      setPassErr(message);
-    }
-    if (success) {
-      setUsrErr();
-      setPassErr();
-      console.log(message);
+
+    const validate = validateLogIn(user, pass, setUsrErr, setPassErr);
+    if (validate) {
+      console.log("works");
     }
     setUser("");
     setPass("");
@@ -69,8 +54,8 @@ const SignUp = () => {
           autoComplete="off"
           size="lg"
           onChange={(e) => {
-            setUsrErr();
-            setPassErr();
+            setUsrErr(false);
+            setPassErr(false);
             setUser(e.target.value);
           }}
         />
@@ -86,8 +71,8 @@ const SignUp = () => {
           autoComplete="off"
           size="lg"
           onChange={(e) => {
-            setUsrErr();
-            setPassErr();
+            setUsrErr(false);
+            setPassErr(false);
             setPass(e.target.value);
           }}
         />

@@ -1,17 +1,17 @@
-const validateLogIn = (data) => {
-  const username = data.username;
-  const password = data.password;
-
-  if (username.length === 0 && password.length === 0) {
-    return { error: "blank", message: "Enter a valid username and password" };
+const validateLogIn = (username, password, setUsrErr, setPassErr) => {
+  if (
+    (username.length === 0 || !username) &&
+    (password.length === 0 || !password)
+  ) {
+    setUsrErr("Enter a valid username");
+    setPassErr("Enter a valid password");
+  } else if (username.length === 0 || !username) {
+    setUsrErr("Enter a valid username");
+  } else if (password.length === 0 || !password) {
+    setPassErr("Enter a valid password");
+  } else {
+    return true;
   }
-  if (username.length === 0) {
-    return { error: "username", message: "Enter a valid username" };
-  }
-  if (password.length === 0) {
-    return { error: "password", message: "Enter a valid password" };
-  }
-  return { success: true, message: "succesfully logged in" };
 };
 
 export default validateLogIn;
