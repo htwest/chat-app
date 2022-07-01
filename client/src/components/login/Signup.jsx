@@ -20,12 +20,13 @@ const SignUp = () => {
   const [usrErr, setUsrErr] = useState(false);
   const [passErr, setPassErr] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     const validate = validateLogIn(user, pass, setUsrErr, setPassErr);
     if (validate) {
-      console.log("works");
+      postSignUp(user, pass).then((data) => {
+        console.log(data);
+      });
     }
     setUser("");
     setPass("");

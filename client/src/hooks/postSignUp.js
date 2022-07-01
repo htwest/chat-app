@@ -1,5 +1,12 @@
 const axios = require("axios");
 
-export const postSignUp = (data) => {
-  return axios.post("/signup", {}).then((response) => response.data);
+const postSignUp = (user, pass) => {
+  return axios
+    .post("http://localhost:4000/signup", {
+      username: user,
+      password: pass,
+    })
+    .then((response) => response.data);
 };
+
+export default postSignUp;
