@@ -5,9 +5,9 @@ const validateLogIn = (username, password, setUsrErr, setPassErr) => {
   ) {
     setUsrErr("Enter a valid username");
     setPassErr("Enter a valid password");
-  } else if (username.length === 0 || !username) {
+  } else if (!username || username.length === 0) {
     setUsrErr("Enter a valid username");
-  } else if (password.length === 0 || !password) {
+  } else if (!password || password.length === 0) {
     setPassErr("Enter a valid password");
   } else {
     return true;

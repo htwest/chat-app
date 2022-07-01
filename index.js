@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const { Server } = require("socket.io");
 const helmet = require("helmet");
 
@@ -8,9 +9,18 @@ const server = require("http").createServer(app);
 
 app.use(helmet());
 app.use(express.json());
+app.use(
+  cors({
+    credentials: true,
+  })
+);
 
 app.get("/", (req, res) => {
   res.json("hi");
+});
+
+app.post("/signup", (req, res) => {
+  res.send("recieved");
 });
 
 const io = new Server(server, {

@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const postSignUp = (user, pass) => {
   return axios
-    .post("http://localhost:4000/signup", {
+    .post("/signup", {
       username: user,
       password: pass,
     })
