@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const postSignUp = (user, pass) => {
   return axios
-    .post("/signup", {
+    .post("/auth/register", {
       username: user,
       password: pass,
     })

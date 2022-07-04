@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const postLogIn = (user, pass) => {
   return axios
-    .post("/login", {
+    .post("/auth/login", {
       username: user,
       password: pass,
     })
