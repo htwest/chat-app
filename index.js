@@ -4,8 +4,11 @@ const { Server } = require("socket.io");
 const helmet = require("helmet");
 
 const app = express();
-
 const server = require("http").createServer(app);
+
+// ******************
+//     MIDDLEWARE
+// ******************
 
 app.use(helmet());
 app.use(express.json());
@@ -15,6 +18,10 @@ app.use(
   })
 );
 
+// ******************
+//     ROUTES
+// ******************
+
 app.get("/", (req, res) => {
   res.json("hi");
 });
@@ -22,6 +29,14 @@ app.get("/", (req, res) => {
 app.post("/signup", (req, res) => {
   res.send("recieved");
 });
+
+app.post("/login", (req, res) => {
+  res.send("recieved");
+});
+
+// ******************
+//     SOCKETS
+// ******************
 
 const io = new Server(server, {
   cors: {

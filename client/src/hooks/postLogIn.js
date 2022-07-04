@@ -1,8 +1,8 @@
 const axios = require("axios");
 
-const postSignUp = (user, pass) => {
+const postLogIn = (user, pass) => {
   return axios
-    .post("/signup", {
+    .post("/login", {
       username: user,
       password: pass,
     })
@@ -12,4 +12,4 @@ const postSignUp = (user, pass) => {
     .then((response) => response.data);
 };
 
-export default postSignUp;
+export default postLogIn;

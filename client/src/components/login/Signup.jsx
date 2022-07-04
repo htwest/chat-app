@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import validateLogIn from "../../hooks/validateLogIn";
+import validateSignUp from "../../hooks/validateLogIn";
 import postSignUp from "../../hooks/postSignUp";
 
 import {
@@ -22,9 +22,9 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validate = validateLogIn(user, pass, setUsrErr, setPassErr);
+    const validate = validateSignUp(user, pass, setUsrErr, setPassErr);
     if (validate) {
-      postSignUp(user, pass).then((data) => {
+      await postSignUp(user, pass).then((data) => {
         console.log(data);
       });
     }

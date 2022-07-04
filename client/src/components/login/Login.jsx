@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import validateLogIn from "../../hooks/validateLogIn";
+import postLogIn from "../../hooks/postLogIn";
 
 import {
   VStack,
@@ -21,28 +22,13 @@ const Login = () => {
   const [passErr, setPassErr] = useState();
 
   // Functions
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = { username: user, password: pass };
-    console.log(data);
-    const { error, message, success } = validateLogIn(data);
-    if (error === "blank") {
-      setUsrErr(message);
-      setPassErr(message);
-    }
-    if (error === "username") {
-      console.log(message);
-      setUsrErr(message);
-      console.log(usrErr);
-    }
-    if (error === "password") {
-      console.log(message);
-      setPassErr(message);
-    }
-    if (success) {
-      setUsrErr();
-      setPassErr();
-      console.log(message);
+    const validate = validateLogIn(user, pass, setUsrErr, setPassErr);
+    if (validate) {
+      await postLogIn(user, pass).then((data) => {
+        console.log(data);
+      });
     }
     setUser("");
     setPass("");
