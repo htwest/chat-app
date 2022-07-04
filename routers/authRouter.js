@@ -1,35 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const Yup = require("yup");
-
-const formSchema = Yup.object({
-  username: Yup.string()
-    .required("Username required")
-    .min(6, "Username too short")
-    .max(28, "Username too long"),
-  password: Yup.string()
-    .required("Password required")
-    .min(6, "Password too short")
-    .max(28, "Password too long"),
-});
+const validateForm = require("../controllers/validateForm");
 
 router.post("/register", (req, res) => {
-  res.send("recieved");
+  validateForm(req, res);
 });
 
 router.post("/login", (req, res) => {
-  const formData = req.body;
-  formSchema
-    .validate(formData)
-    .catch((err) => {
-      console.log(err.errors);
-    })
-    .then((valid) => {
-      if (valid) {
-        console.log("form is good");
-      }
-    });
-  res.send("recieved");
+  validateForm(req, res);
 });
 
 module.exports = router;
